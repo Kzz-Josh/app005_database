@@ -13,6 +13,8 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             ElevatedButton(onPressed: () {}, child: Text("Mostrar data")),
+            ElevatedButton(
+                onPressed: () {}, child: Text("Mostrar segunda Data"))
           ],
         ),
       ),

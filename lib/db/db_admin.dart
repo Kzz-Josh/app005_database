@@ -16,7 +16,10 @@ class DBAdmin {
     }
 
     myDatabase = await initDatabase();
-    return myDatabase;
+    myDatabase;
+
+    myDatabase = await secondDatabase();
+    myDatabase;
   }
 
   Future<Database> initDatabase() async {
@@ -29,6 +32,20 @@ class DBAdmin {
       onCreate: (Database dbx, int version) async {
         await dbx.execute(
             "CREATE TABLE task(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, status TEXT)");
+      },
+    );
+  }
+
+  Future<Database> secondDatabase() async {
+    Directory directory = await getApplicationDocumentsDirectory();
+    String path = join(directory.path, "studentDB.db");
+    return await openDatabase(
+      path,
+      version: 1,
+      onOpen: (db) {},
+      onCreate: (Database dbx, int version) async {
+        await dbx.execute(
+            "CREATE TABLE student(id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, apellido TEXT, DNI INTEGER)");
       },
     );
   }
